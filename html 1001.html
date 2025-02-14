@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            background-color: #ffe6e6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: transform 0.3s ease-in-out;
+        }
+        .question {
+            font-size: 28px;
+            font-weight: bold;
+            color: #d14757;
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 50px;
+            justify-content: center;
+        }
+        button {
+            font-size: 20px;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.2s, background-color 0.3s;
+            position: relative;
+        }
+        .yes {
+            background-color: #ff6b81;
+            color: white;
+            margin-right: 150px;
+        }
+        .yes:hover {
+            transform: scale(1.1);
+            background-color: #ff4757;
+        }
+        .no {
+            background-color: #999;
+            color: white;
+            position: absolute;
+            transition: transform 0.3s ease-in-out, left 0.3s ease-out, top 0.3s ease-out;
+            margin-left: 105px;
+        }
+        .bear-img {
+            width: 180px;
+            display: block;
+            margin: 0 auto 15px;
+            transition: transform 0.5s ease-in-out;
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 24px;
+            animation: float 3s linear infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="Cute Bear" class="bear-img">
+        <p class="question">Will you be my Valentine? 💖</p>
+        <div class="buttons">
+            <button class="yes" onclick="showLove()">Yes 💕</button>
+            <button class="no" id="noButton" onmouseover="runAway()">No 😢</button>
+        </div>
+        <p id="response" style="font-size: 22px; margin-top: 20px; color: #555;"></p>
+    </div>
+
+    <script>
+        function showLove() {
+            document.getElementById("response").innerHTML = "Yay! I love you! ❤️🥰";
+            document.getElementById("mainContainer").style.transform = "scale(1.1)";
+            for (let i = 0; i < 20; i++) {
+                createHeart();
+                createGift();
+            }
+        }
+
+        function runAway() {
+            let button = document.getElementById("noButton");
+            let maxX = window.innerWidth - button.offsetWidth;
+            let maxY = window.innerHeight - button.offsetHeight;
+            let newX = Math.random() * maxX;
+            let newY = Math.random() * maxY;
+            button.style.transform = `translate(${newX}px, ${newY}px)`;
+        }
+
+        function createHeart() {
+            let heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.classList.add("heart");
+            document.body.appendChild(heart);
+            let x = Math.random() * window.innerWidth;
+            let y = window.innerHeight;
+            heart.style.left = `${x}px`;
+            heart.style.top = `${y}px`;
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+
+        function createGift() {
+            let gift = document.createElement("div");
+            gift.innerHTML = "🎁";
+            gift.classList.add("heart");
+            document.body.appendChild(gift);
+            let x = Math.random() * window.innerWidth;
+            let y = window.innerHeight;
+            gift.style.left = `${x}px`;
+            gift.style.top = `${y}px`;
+            setTimeout(() => {
+                gift.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
